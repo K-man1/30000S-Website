@@ -1,14 +1,196 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>30000S Website</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Robo Sapiens 30000S | VEX V5 Robotics</title>
+  <meta name="description" content="Robo Sapiens (30000S) — VEX V5 Robotics team based in Monroe Township, NJ. Outreach, sponsors, and competition build logs." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
-    <h1>30000S Robo Sapiens</h1>
-    <img src="logo.png" alt="logo">
-    <script src="script.js"></script>
+  <div id="cursor-glow" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="brand" href="#top" aria-label="Robo Sapiens Home">
+      <img src="logo.png" alt="Robo Sapiens logo" />
+      <span>ROBO SAPIENS</span>
+      <span class="pill">30000S</span>
+    </a>
+
+    <nav class="links">
+      <a class="magnet" href="#about">About</a>
+      <a class="magnet" href="#awards">Awards</a>
+      <a class="magnet" href="#outreach">Outreach</a>
+      <a class="magnet" href="#sponsors">Sponsors</a>
+      <a class="magnet" href="#contact">Contact</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button id="themeBtn" class="btn ghost magnet" type="button" aria-label="Toggle theme">
+        <span class="icon" aria-hidden="true">◐</span>
+      </button>
+      <a class="btn primary magnet" href="#sponsors">Sponsor Us</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-left">
+        <div class="kicker reveal">Monroe township, nj • nonprofit via hcb</div>
+        <h1 class="title reveal">
+          Robo<br/>
+          Sapiens<br/>
+          <span class="accent">Team 30000S</span>
+        </h1>
+        <p class="sub reveal">
+          We’re Robo Sapiens (30000S), a first-year VEX V5 team building robots, community, and the next generation of robotics students.
+        </p>
+
+        <div class="hero-actions reveal">
+          <a class="btn primary magnet" href="#outreach">See Outreach</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div id="robot-viewer"></div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="section-head reveal">
+        <h2>About</h2>
+        <p>We’re a 4-person VEX V5 team based in Monroe Township, New Jersey. We operate as a nonprofit through Hack Club Bank (HCB).</p>
+      </div>
+    </section>
+
+    <section id="awards" class="section">
+      <div class="section-head reveal">
+        <h2>Awards</h2>
+        <p>First year. And we’re just getting started.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="tick reveal">
+          <div class="dot"></div>
+          <div class="tick-content">
+            <div class="tick-title">Judge’s Award — Local Competition</div>
+            <div class="tick-sub">Recognition for strong team interview, design process, and teamwork.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="outreach" class="section">
+      <div class="section-head reveal">
+        <h2>Outreach + Blog</h2>
+        <p>Our community work - the stuff that actually matters.</p>
+      </div>
+
+      <div class="grid three">
+        <article class="post reveal">
+          <div class="post-tag">build log</div>
+          <h3>week 1: drivetrain decisions</h3>
+          <p>speed, control, and why we chose the path we did.</p>
+          <button class="link magnet" data-modal="drive">read</button>
+        </article>
+        <article class="post reveal">
+          <div class="post-tag">8/11/25 - 8/15/25</div>
+          <h3>MTMS VEX IQ Mentoring</h3>
+          <p>Mentoring students at a local middle school and introducting them to robotics.</p>
+          <button class="link magnet" data-modal="demo">Read</button>
+        </article>
+        <article class="post reveal">
+          <div class="post-tag">sponsors</div>
+          <h3>why support us</h3>
+          <p>what your sponsorship enables (and the impact you get back).</p>
+          <button class="link magnet" data-modal="sponsor">read</button>
+        </article>
+      </div>
+    </section>
+
+    <section id="sponsors" class="section">
+      <div class="section-head reveal">
+        <h2>sponsors</h2>
+        <p>Want your logo here? Let’s build something legendary together.</p>
+      </div>
+
+      <div class="marquee" aria-label="Sponsor marquee">
+        <div class="marquee-track">
+          <span>your logo here</span>
+          <span>community impact</span>
+          <span>stem outreach</span>
+          <span>robotics innovation</span>
+          <span>robosapiens 30000s</span>
+          <span>your logo here</span>
+          <span>community impact</span>
+          <span>stem outreach</span>
+          <span>robotics innovation</span>
+          <span>robosapiens 30000s</span>
+        </div>
+      </div>
+
+      <div class="sponsor-wall reveal">
+        <div class="sponsor-slot magnet">logo</div>
+        <div class="sponsor-slot magnet">logo</div>
+        <div class="sponsor-slot magnet">logo</div>
+        <div class="sponsor-slot magnet">logo</div>
+        <div class="sponsor-slot magnet">logo</div>
+        <div class="sponsor-slot magnet">logo</div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="section-head reveal">
+        <h2>contact</h2>
+        <p>Want to sponsor, collaborate, or invite us for a demo? Send a message.</p>
+      </div>
+
+      <form class="form reveal" id="contactForm">
+        <div class="row">
+          <label>
+            <span>name</span>
+            <input name="name" type="text" placeholder="your name" required />
+          </label>
+          <label>
+            <span>email</span>
+            <input name="email" type="email" placeholder="you@example.com" required />
+          </label>
+        </div>
+        <label>
+          <span>message</span>
+          <textarea name="message" rows="6" placeholder="tell us what you’re thinking…" required></textarea>
+        </label>
+
+        <div class="form-actions">
+          <button class="btn primary magnet" type="submit">send</button>
+          <div class="hint">backend is yours — this form just gives you clean data.</div>
+        </div>
+      </form>
+    </section>
+
+    <footer class="footer">
+      <div>© <span id="year"></span> Robo Sapiens (30000S) • Monroe Township, NJ • nonprofit via HCB</div>
+      <div class="footer-right">
+        <a class="magnet" href="#top">back to top</a>
+      </div>
+    </footer>
+  </main>
+
+  <!-- modal -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-label="Post modal">
+      <button class="modal-x magnet" data-close aria-label="Close">×</button>
+      <div class="modal-content" id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script type="module" src="robot-viewer.js"></script>
+
 </body>
 </html>
