@@ -73,58 +73,6 @@ $$('[data-tilt]').forEach(card => {
   });
 });
 
-/* -------------------- modal posts -------------------- */
-const modal = $("#modal");
-const modalContent = $("#modalContent");
-const postData = {
-  demo: {
-    title: "robot demo day",
-    body: [
-      "We bring our robot to community spaces and let students drive it.",
-      "Goal: make robotics feel hands-on, not intimidating — and help younger students see themselves in STEM."
-    ]
-  },
-  drive: {
-    title: "week 1: drivetrain decisions",
-    body: [
-      "We treated drivetrain as a system: speed, traction, control, and build time.",
-      "We’ll publish testing clips + notes as we iterate."
-    ]
-  },
-  sponsor: {
-    title: "why support us",
-    body: [
-      "Sponsorship pays for parts, registration, travel, outreach materials, and tools.",
-      "You get community visibility + direct impact: every dollar builds access to STEM."
-    ]
-  }
-};
-
-function openModal(key){
-  const d = postData[key];
-  if (!d) return;
-  modalContent.innerHTML = `
-    <h3>${d.title}</h3>
-    ${d.body.map(p => `<p>${p}</p>`).join("")}
-  `;
-  modal.classList.add("open");
-  modal.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
-}
-function closeModal(){
-  modal.classList.remove("open");
-  modal.setAttribute("aria-hidden", "true");
-  document.body.style.overflow = "";
-}
-
-$$("[data-modal]").forEach(btn => {
-  btn.addEventListener("click", () => openModal(btn.dataset.modal));
-});
-$$("[data-close]").forEach(el => el.addEventListener("click", closeModal));
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
-});
-
 /* -------------------- contact form (NO REDIRECT) -------------------- */
 $("#contactForm")?.addEventListener("submit", async (e) => {
   e.preventDefault();
