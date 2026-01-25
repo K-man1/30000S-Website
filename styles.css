@@ -207,6 +207,43 @@ main {
   grid-template-columns: repeat(3, 1fr);
 }
 
+/* Carousel for posts (arrows + horizontal scroll) */
+.carousel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+.carousel-track {
+  overflow: hidden;
+  flex: 1 1 auto;
+}
+.carousel-list {
+  display: flex;
+  gap: 16px;
+  transition: transform 0.36s ease;
+  will-change: transform;
+  padding: 6px 2px;
+}
+.carousel-list .post {
+  flex: 0 0 auto;
+  width: 320px;
+}
+.carousel-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+}
+.carousel-btn[disabled] {
+  opacity: 0.4;
+  cursor: default;
+}
+
 .panel,
 .post,
 .form,
@@ -215,8 +252,13 @@ main {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 16px;
+  padding: 0px;
+  padding: 15px;
   transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.sponsor-slot {
+  padding: 0;
 }
 
 /* KEEP THIS — hover effect you liked */
@@ -291,12 +333,24 @@ main {
 
 .sponsor-slot {
   height: 90px;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
   color: var(--muted);
   font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  padding: 0 12px;
+}
+
+.sponsor-slot img {
+  width: auto;
+  display: block;
+}
+
+.sponsor-slot .sponsor-name {
+  display: inline-block;
 }
 
 /* =========================
@@ -345,6 +399,33 @@ textarea:focus {
   justify-content: space-between;
   gap: 12px;
 }
+
+/* Social icons in footer */
+.social {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: var(--muted);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.social-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: rgba(0, 64, 95, 0.06);
+}
+
+.social svg { display: block; }
 
 /* =========================
    REVEAL (STAYS)
@@ -484,6 +565,9 @@ body:hover #cursor-glow {
   .grid.two,
   .grid.three {
     grid-template-columns: 1fr;
+  }
+  .carousel-list .post {
+    width: 100%;
   }
   .form .row {
     grid-template-columns: 1fr;

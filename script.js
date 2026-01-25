@@ -61,7 +61,7 @@ window.addEventListener("pointermove", (e) => {
 });
 
 /* -------------------- tilt cards -------------------- */
-$$("[data-tilt]").forEach(card => {
+$$('[data-tilt]').forEach(card => {
   card.addEventListener("mousemove", (e) => {
     const r = card.getBoundingClientRect();
     const px = (e.clientX - r.left) / r.width - 0.5;
@@ -125,24 +125,41 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
 });
 
-/* -------------------- contact form (frontend only) -------------------- */
-$("#contactForm")?.addEventListener("submit", (e) => {
+/* -------------------- contact form (NO REDIRECT) -------------------- */
+$("#contactForm")?.addEventListener("submit", async (e) => {
   e.preventDefault();
+  e.stopPropagation();
+
   const form = e.currentTarget;
-  const data = Object.fromEntries(new FormData(form).entries());
-
-  // you’ll replace this with your backend call (fetch to your endpoint)
-  console.log("contact form payload:", data);
-
-  // micro UX
   const btn = form.querySelector("button[type='submit']");
-  btn.textContent = "sent ✓";
+  const formData = new FormData(form);
+
+  btn.textContent = "sending...";
   btn.disabled = true;
+
+  try {
+    const res = await fetch(form.action, {
+      method: "POST",
+      body: formData,
+      headers: { Accept: "application/json" }
+    });
+
+    if (res.ok) {
+      btn.textContent = "Sent ✓";
+      form.reset();
+    } else {
+      btn.textContent = "error";
+    }
+  } catch {
+    btn.textContent = "error";
+  }
+
   setTimeout(() => {
     btn.textContent = "send";
     btn.disabled = false;
-    form.reset();
-  }, 1400);
+  }, 16000);
+
+  return false;
 });
 
 /* -------------------- fun button -------------------- */
@@ -156,3 +173,58 @@ $("#playBtn")?.addEventListener("click", () => {
     { duration: 900, easing: "ease-in-out" }
   );
 });
+
+  /* -------------------- posts carousel -------------------- */
+  (function initPostsCarousel(){
+    const track = document.querySelector('.carousel-track');
+    if (!track) return;
+    const list = track.querySelector('.carousel-list');
+    const items = Array.from(list.children);
+    const prev = document.querySelector('.carousel-btn.prev');
+    const next = document.querySelector('.carousel-btn.next');
+    let current = 0;
+
+    function visibleCount(){
+      if (window.innerWidth <= 700) return 1;
+      if (window.innerWidth <= 900) return 2;
+      return 3;
+    }
+
+    function getGap(){
+      const g = getComputedStyle(list).gap;
+      return g ? parseFloat(g) : 16;
+    }
+
+    function resize(){
+      const visible = Math.min(visibleCount(), items.length);
+      const gap = getGap();
+      const trackW = track.clientWidth;
+      const itemW = Math.floor((trackW - gap * (visible - 1)) / visible);
+      items.forEach(it => it.style.width = itemW + 'px');
+      update();
+    }
+
+    function update(){
+      if (!items.length) return;
+      const gap = getGap();
+      const slideSize = items[0].getBoundingClientRect().width + gap;
+      const visible = Math.min(visibleCount(), items.length);
+      const maxIndex = Math.max(0, items.length - visible);
+      if (current > maxIndex) current = maxIndex;
+      list.style.transform = `translateX(${-current * slideSize}px)`;
+      if (prev) prev.disabled = current === 0;
+      if (next) next.disabled = current === maxIndex;
+    }
+
+    prev?.addEventListener('click', () => { current = Math.max(0, current - 1); update(); });
+    next?.addEventListener('click', () => {
+      const visible = Math.min(visibleCount(), items.length);
+      const maxIndex = Math.max(0, items.length - visible);
+      current = Math.min(maxIndex, current + 1);
+      update();
+    });
+
+    window.addEventListener('resize', resize);
+    // initial layout
+    setTimeout(resize, 30);
+  })();
